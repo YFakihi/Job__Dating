@@ -47,34 +47,36 @@ class PartnerController extends Controller
      */
     public function show(Partner $partner)
     {
-        return view ('admin.partners.show',compact('partners'));
+        return view('admin.partners.show', compact('partner'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Partner $partner)
     {
-        return view('admin.partners.edit',compact('partners'));   
+        return view('admin.partners.edit', compact('partner'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Partner $partner)
-    {
-        $request->validate([
-            'name'=>'required|min:10|max:255',
-            'description'=>'required|string',
-            'industry'=>'required|string',
-            'size'=>'required|string',
-            'location'=>'required|string',
-        ]);
-        
-        Partner::create($request);
-         
-        return redirect()->update('admin.partners.index')->with('success','Book created successfully.');
-    }
+{
+    $request->validate([
+        'name' => 'required|min:10|max:255',
+        'description' => 'required|string',
+        'industry' => 'required|string',
+        'size' => 'required|string',
+        'location' => 'required|string',
+    ]);
+
+    $partner->update($request->all());
+
+    return redirect()->back()->with('success', 'Partner updated successfully.');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -83,6 +85,6 @@ class PartnerController extends Controller
     {
         $partner->delete();
          
-        return redirect()->route('admin.partners.index')->with('success','partner deleted successfully');
+        return redirect()->back()->with('success','partner deleted successfully');
     }
 }

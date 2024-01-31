@@ -1,84 +1,74 @@
 @include("layouts.app")
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add New Partner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
 </head>
-<body>
 
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Add New Entreprise</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('partners.index') }}"> Back</a>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Add New Partners</h2>
+                </div>
+                <hr>
+
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                <form action="{{ route('partners.store') }}" method="POST">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" name="name" class="form-control" placeholder="Name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description:</label>
+                        <input type="text" name="description" class="form-control" placeholder="Description">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="industry" class="form-label">Industry:</label>
+                        <input type="text" name="industry" class="form-control" placeholder="Industry">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="size" class="form-label">Size:</label>
+                        <select name="size" class="form-select">
+                            <option value="small">Small</option>
+                            <option value="medium">Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location:</label>
+                        <input type="text" name="location" class="form-control" placeholder="Location">
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </div></br></br></br>
+                </form>
             </div>
         </div>
     </div>
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <form action="{{ route('partners.store') }}" method="POST">
-        @csrf
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="Name">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>description:</strong>
-                    <input type="text" name="description" class="form-control" placeholder="Location">
-                </div>
-            </div>
-         
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>industry:</strong>
-                    <input type="text" name="industry" class="form-control" placeholder="Details">
-                </div>
-            </div>
-
-         
-
-
-             <select name="size" id="">
-             <option value="small">small</option>
-             <option value="medium">medium</option>
-             <option value="large">large</option>
-</select>
-          
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>location:</strong>
-                    <input type="text" name="location" class="form-control" placeholder="Details">
-                </div>
-            </div>
-            
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-
-    </form>
-        
 </body>
+
 </html>
