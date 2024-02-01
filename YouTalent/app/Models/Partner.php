@@ -13,4 +13,10 @@ class Partner extends Model
     protected $fillable=[
         "name","description","industry","size","location"
     ];
+
+
+    public function adverts()
+    {
+        return $this->hasMany(Advert::class);
+    }
 }

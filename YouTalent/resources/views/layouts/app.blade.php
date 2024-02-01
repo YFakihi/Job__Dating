@@ -25,7 +25,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Home
                 </a>
-                <a class="navbar-brand" href="{{ url('/adverts') }}">
+                <a class="navbar-brand" href="{{ url('adverts') }}">
                     adverts
                 </a>
 
