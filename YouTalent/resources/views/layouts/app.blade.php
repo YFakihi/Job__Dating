@@ -22,7 +22,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     Home
                 </a>
                 <a class="navbar-brand" href="{{ url('adverts') }}">
@@ -72,6 +72,7 @@
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
+                                        <button type="submit"></button>
                                     </form>
                                 </div>
                             </li>

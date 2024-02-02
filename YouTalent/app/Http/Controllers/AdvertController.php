@@ -13,6 +13,7 @@ class advertController extends Controller
     public function index()
     {
         $adverts = advert::latest()->paginate(5);
+        // $partner=Partner::all();
         return view('admin.adverts.index',compact('adverts'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -22,7 +23,7 @@ class advertController extends Controller
     public function create()
     {
         $partners = Partner::all(); // Assuming Partner is the model for your partners table
-        return view('admin.adverts.create', compact('partners'));   
+        return view('admin.adverts.create', compact('partners','partners'));   
     }
 
     /**
@@ -33,7 +34,7 @@ class advertController extends Controller
         $request->validate([
             'title'=>'required|min:10|max:255',
             'content'=>'required|string',
-            'name'=>'required|string',
+    
             
         ]);
         

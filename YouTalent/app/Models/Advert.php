@@ -12,12 +12,17 @@ class Advert extends Model
     protected $table = 'adverts';
 
     protected $fillable=[
-        "title","content","name"
+        "title","content","partner_id"
     ];
-
-    public function partners()
+    public function partner()
     {
-        return $this->belongsTo(Partner::class);
+        return $this->belongsTo(Partner::class, 'partner_id');
+    }
+
+
+    public function adverts()
+    {
+        return $this->hasMany(Advert::class);
     }
 
 }

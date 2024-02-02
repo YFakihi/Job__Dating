@@ -33,7 +33,7 @@
         </tr>
         @foreach ($partners as $partner)
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{$loop->iteration}}</td>
             <td>{{ $partner->name }}</td>
             <td>{{ $partner->description }}</td>
             <td>{{ $partner->industry }}</td>

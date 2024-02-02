@@ -16,15 +16,13 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
-Route::resource('partners', PartnerController::class);
-Route::resource('adverts',AdvertController::class);
+Route::resource('partners', PartnerController::class)->middleware('auth');
+Route::resource('adverts',AdvertController::class)->middleware('auth');
 
 

@@ -6,14 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title</title>
+    <title< /title>
 </head>
 
 <body>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-               
+
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('adverts.create') }}">Create New company</a>
@@ -27,16 +27,15 @@
             <th>title</th>
             <th>content</th>
             <th>partner_name</th>
-      
             <th width="280px">Action</th>
         </tr>
-        @foreach ($adverts as $advert)
-        <tr>
-            <td>{{ ++$i }}</td>
+           @foreach ($adverts as $advert)
+            <tr>
+            <td>{{ $loop->iteration }}</td>
             <td>{{ $advert->title }}</td>
             <td>{{ $advert->content }}</td>
-            <td>{{ $advert->partner_id }}</td>
-  
+            <td>{{ optional($advert->partner)->name }}</td>
+
             <td>
                 <form action="{{ route('adverts.destroy', $advert->id) }}" method="POST">
 

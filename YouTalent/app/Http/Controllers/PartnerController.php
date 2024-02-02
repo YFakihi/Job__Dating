@@ -13,7 +13,7 @@ class PartnerController extends Controller
     public function index()
     {
         $partners = Partner::latest()->paginate(5);
-        return view('admin.partners.index',compact('partners'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('admin.partners.index',compact('partners'));
     }
 
     /**
