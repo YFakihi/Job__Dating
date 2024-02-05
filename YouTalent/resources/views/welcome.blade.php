@@ -1,5 +1,6 @@
 
-<!DOCTYPE html>
+{{-- @include("layouts.app")  --}}
+<!DOCTYPE html> 
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -42,9 +43,9 @@
                         <a href="https://laravel.com/docs" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                             
                             <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                  
-                                </div>
+                          
+                                  <img src='https://img.freepik.com/free-photo/3d-render-megaphone-loudspeaker-with-flashes_107791-17345.jpg?w=740&t=st=1706873491~exp=1706874091~hmac=2e4197d22bbd9bc1c004761418646b67fa559d035519c3bda855d6de02c2a9d9' class="card-img-top" alt="Book Image">
+                             
                                 
                                 <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">{{$advert->title}}</h2>
 
@@ -57,26 +58,14 @@
                            
                         </a>
                         @endforeach
+                       
+                        <div>
+                            {{$adverts->links()}}
+                        </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-                        
-
-                   
-
-                  
                 </div>
             </div>
-        </div>
+        </div> 
     </body>
 </html>

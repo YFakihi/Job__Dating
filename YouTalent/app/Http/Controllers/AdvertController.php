@@ -12,10 +12,11 @@ class advertController extends Controller
      */
     public function index()
     {
-        $adverts = advert::latest()->paginate(5);
-        // $partner=Partner::all();
-        return view('admin.adverts.index',compact('adverts'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $adverts = advert::latest()->paginate(9);
+        return view('admin.adverts.index', compact('adverts'));
     }
+    
+
 
     /**
      * Show the form for creating a new resource.
@@ -40,7 +41,7 @@ class advertController extends Controller
         
         advert::create($request->all());
         // advert::create($request->validated());
-        return redirect()->back()->with('success','Book created successfully.');
+        return redirect()->route('adverts.index')->with('success','advert created successfully.');
         
     }
 
@@ -49,9 +50,16 @@ class advertController extends Controller
      */
     public function show(advert $advert)
     {
+    
         return view('admin.adverts.show', compact('advert'));
     }
     
+    // public function showWelcome()
+    // {
+    //     $adverts = advert::latest()->paginate(3);
+    //     // $partner=Partner::all();
+    //     return view('admin.adverts.show',compact('adverts'));
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -88,4 +96,6 @@ class advertController extends Controller
          
         return redirect()->back()->with('success','advert deleted successfully');
     }
+
+   
 }

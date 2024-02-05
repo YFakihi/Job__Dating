@@ -4,7 +4,7 @@ use App\Http\Controllers\AdvertController;
 use App\Http\Controllers\PartnerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +22,12 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
+Route::get('/partners/archive',[App\Http\Controllers\PartnerController::class,'archive'])->name('partners.archive');
+Route::get('/partners/all',[App\Http\Controllers\PartnerController::class,'all'])->name('partners.all');
+// Route::get('/partners/all', 'App\Http\Controllers\PartnerController@all')->name('partners.all');    
+
 Route::resource('partners', PartnerController::class)->middleware('auth');
 Route::resource('adverts',AdvertController::class)->middleware('auth');
+
 
 

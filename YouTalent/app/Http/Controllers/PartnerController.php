@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PartnerRaquest;
 use App\Models\Partner;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,34 @@ class PartnerController extends Controller
     public function index()
     {
         $partners = Partner::latest()->paginate(5);
+
         return view('admin.partners.index',compact('partners'));
     }
+
+
+    public function archive()
+    {
+        $partners = Partner::onlyTrashed()->get();
+
+        return view('admin.partners.index',compact('partners'));
+    }
+
+    public function all()
+    {
+        $partners = Partner::withTrashed()->get();
+
+        return view('admin.partners.index',compact('partners'));
+    }
+
+
+    
+  // public function archive()
+    // {
+    //     $partners = Partner::onlyTrashed()->get(); // Use get() to retrieve all soft-deleted records
+    //     // Or use $partners = Partner::onlyTrashed()->first(); // if you expect only one soft-deleted recor
+    //     return view('admin.partners.index', compact('partners'));
+    // }
+
 
     /**
      * Show the form for creating a new resource.
@@ -27,20 +54,15 @@ class PartnerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PartnerRaquest $request)
     {
-        $request->validate([
-            'name'=>'required|min:10|max:255',
-            'description'=>'required|string',
-            'industry'=>'required|string',
-            'size'=>'required|in:small,medium,large',
-            'location'=>'required|string',
-        ]);
-        
+        $request->validated();
+
         Partner::create($request->all());
-        // Partner::create($request->validated());
-        return redirect()->back()->with('success','Book created successfully.');
+
+        return redirect()->route('partners.index')->with('success', 'Partner created successfully.');
     }
+
 
     /**
      * Display the specified resource.
@@ -49,7 +71,7 @@ class PartnerController extends Controller
     {
         return view('admin.partners.show', compact('partner'));
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -62,15 +84,9 @@ class PartnerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Partner $partner)
+    public function update(PartnerRaquest $request, Partner $partner)
 {
-    $request->validate([
-        'name' => 'required|min:10|max:255',
-        'description' => 'required|string',
-        'industry' => 'required|string',
-        'size' => 'required|string',
-        'location' => 'required|string',
-    ]);
+    $request->validated();
 
     $partner->update($request->all());
 
@@ -84,7 +100,6 @@ class PartnerController extends Controller
     public function destroy(Partner $partner)
     {
         $partner->delete();
-         
         return redirect()->back()->with('success','partner deleted successfully');
     }
 }

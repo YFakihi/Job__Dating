@@ -23,8 +23,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
-        $adverts = Advert::all();
+    {     $adverts = advert::latest()->paginate(4);
+       
         return view('welcome',compact('adverts'));
     }
 }

@@ -21,6 +21,26 @@
         </div>
     </div>
 
+
+
+    <nav class="nav nav-tabs nav-stacked my-5">
+        <a class="nav-link" href="{{ route('partners.index') }}">List partners</a>
+        <a class="nav-link" href="{{ route('partners.archive') }}">Archive Partners</a>
+        <a class="nav-link" href="{{ route('partners.all') }}">All Partners</a> 
+    </nav>
+
+     <div class="my-5 mx-3" >
+        <h4>{{$partners->count() }} partners</h4>
+    </div> 
+
+    @if (Session::has('success'))
+    <div class="alert alert-primary" role="alert">
+        {{ Session::get('success') }}
+    </div>
+@endif
+
+
+
     <table class="table table-bordered">
         <tr>
             <th>No</th>
@@ -56,7 +76,7 @@
         @endforeach
     </table>
 
-    {!! $partners->links() !!}
+    {{-- {!! $partners->links() !!} --}}
 
 
 
