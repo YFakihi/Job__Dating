@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdvertController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SkillsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -28,6 +30,9 @@ Route::get('/partners/all',[App\Http\Controllers\PartnerController::class,'all']
 
 Route::resource('partners', PartnerController::class)->middleware('auth');
 Route::resource('adverts',AdvertController::class)->middleware('auth');
+Route::resource('roles',RoleController::class)->middleware('auth');
+Route::resource('skills',SkillsController::class)->middleware('auth');
+
 
 
 

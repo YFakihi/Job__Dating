@@ -34,9 +34,7 @@ class advertController extends Controller
     {
         $request->validate([
             'title'=>'required|min:10|max:255',
-            'content'=>'required|string',
-    
-            
+            'content'=>'required|string',   
         ]);
         
         advert::create($request->all());

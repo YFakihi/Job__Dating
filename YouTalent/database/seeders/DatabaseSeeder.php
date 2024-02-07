@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,17 +15,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // // Create roles
+        $adminRole = Role::create(['name' => 'admin']);
+        $superadminRole = Role::create(['name' => 'superadmin']);
+        $learnerRole = Role::create(['name' => 'learner']);
 
-        // \App\Models\User::factory()->create([
+       
+        Permission::create(['name' => 'crete_role']);
+
+        
+
+        $adminRole->givePermissionTo(['crete_role',]);
+        
+
+        // Create a test user
+        // $user = User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
+        //     'password' => Hash::make('password'),
         // ]);
 
-        DB::table('users')->insert([
-            'name' => 'Test User',
-            'email' => 'tehust@example.com',
-            'password'=>Hash::make('password'),
-        ]);
+        
+        // $user->assignRole('learner');
     }
 }
