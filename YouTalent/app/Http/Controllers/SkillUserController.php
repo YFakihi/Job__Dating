@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\user_skills;
+use App\Models\skill_user;
 use Illuminate\Http\Request;
 
-class UserSkillsController extends Controller
+class SkillUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class UserSkillsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(user_skills $user_skills)
+    public function show(skill_user $skill_user)
     {
         //
     }
@@ -42,7 +42,7 @@ class UserSkillsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(user_skills $user_skills)
+    public function edit(skill_user $skill_user)
     {
         //
     }
@@ -50,7 +50,7 @@ class UserSkillsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, user_skills $user_skills)
+    public function update(Request $request, skill_user $skill_user)
     {
         //
     }
@@ -58,7 +58,7 @@ class UserSkillsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(user_skills $user_skills)
+    public function destroy(skill_user $skill_user)
     {
         //
     }
