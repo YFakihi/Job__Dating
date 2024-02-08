@@ -43,7 +43,7 @@ class SkillsController extends Controller
         foreach ($request->inputs as $key => $value) {
             Skills::create($value);
     }
-    return back()->with('success', 'Skills saved successfully');
+       return back()->with('success', 'Skills saved successfully');
 
 }
 

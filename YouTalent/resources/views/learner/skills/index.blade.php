@@ -11,15 +11,6 @@
 <body>
     @include("layouts.app")
 
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left"></div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('skills.create') }}">Add Skills</a>
-            </div>
-            <br><br>
-        </div>
-    </div>
 
     <form action="" method="post">
         @csrf
