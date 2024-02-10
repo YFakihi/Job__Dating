@@ -29,9 +29,17 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+
     public function skills()
     {
         return $this->belongsToMany(Skills::class, 'skill_user'); // Adjust pivot table name here
     }
+
+    public function adverts()
+    {
+        return $this->belongsToMany(Advert::class, 'user_advert','user_id','advert_id'); // Adjust pivot table name here
+    }
 }
+
 

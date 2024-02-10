@@ -21,11 +21,16 @@ class Advert extends Model
         return $this->belongsTo(Partner::class, 'partner_id');
     }
 
-    public function skills()
+    public function users()
     {
-        return $this->belongsToMany(advert_skills::class);
+        return $this->belongsTo(User::class, 'user_advert','user_id','advert_id');
     }
 
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skills::class, 'skill_advert'); 
+    }
 
 
     // public function adverts()

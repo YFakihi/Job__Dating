@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Partner;
 use App\Models\advert;
+use App\Models\Skills;
 use Illuminate\Http\Request;
 
 class advertController extends Controller
@@ -13,7 +14,8 @@ class advertController extends Controller
     public function index()
     {
         $adverts = advert::latest()->paginate(9);
-        return view('admin.adverts.index', compact('adverts'));
+        
+        return view('admin.adverts.index', compact('adverts',));
     }
     
 
@@ -23,8 +25,10 @@ class advertController extends Controller
      */
     public function create()
     {
-        $partners = Partner::all(); // Assuming Partner is the model for your partners table
-        return view('admin.adverts.create', compact('partners','partners'));   
+        $partners = Partner::all();
+        $allskills = Skills::all();
+        // Assuming Partner is the model for your partners table
+        return view('admin.adverts.create', compact('partners','partners','allskills'));   
     }
 
     /**
@@ -34,15 +38,31 @@ class advertController extends Controller
     {
         $request->validate([
             'title'=>'required|min:10|max:255',
-            'content'=>'required|string',   
+            'content'=>'required|string', 
+            'skills' => 'array',  
         ]);
         
-        advert::create($request->all());
-        // advert::create($request->validated());
+        $adverts = advert::create($request->all());
+        $id_skill = $request->skill_ids;
+        $adverts->Skills()->attach($id_skill);
+                // advert::create($request->validated());
         return redirect()->route('adverts.index')->with('success','advert created successfully.');
         
     }
 
+    public function applay(Request $request ){
+       
+        if (auth()->check()) {
+            $user = auth()->user();
+            $user->adverts()->attach($request->advert_ids);
+            
+            return redirect()->route('adverts.index');
+        } else {
+            // Handle the case where the user is not authenticated
+            // Redirect them to the login page or show an error message
+            return redirect()->route('login'); // Example redirect to the login page
+        }
+    }
     /**
      * Display the specified resource.
      */

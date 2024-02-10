@@ -61,6 +61,7 @@
                         <label for="location" class="form-label">Location:</label>
                         <input type="text" name="location" class="form-control" placeholder="Location">
                     </div>
+                    
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Ajouter</button>

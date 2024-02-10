@@ -36,14 +36,18 @@
                             <h2 class="card-title">{{$advert->title}}</h2>
                             <p class="card-text">{{$advert->content}}</p>
                             <h2 class="card-title">{{$advert->partner->name}}</h2>
-                            <button type="button" class="btn btn-warning">Apply now</button>
+                            <form action="{{route('advert.applay') }}" method="post">
+                                <input type="hidden" name="advert_ids[]" value="{{$advert->id}}" >
+                                @method('PUT')
+                                  @csrf
+                                <button  type="submit" class="btn btn-warning">Apply now</button>
+                            </form>
+                           
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-
-
     </div>
   
 @endsection

@@ -23,26 +23,35 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                @can('admin')
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/adverts') }}">Dashboard</a>
-                </li>
-              
-                <a class="navbar-brand" href="{{ url('adverts') }}">
-                    adverts
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    Home
                 </a>
+                @if (Auth::check()) <!-- Check if user is authenticated -->
+                @if (Auth::user()->HasRole('learner'))
+                    <a class="navbar-brand" href="profile">
+                        Profile
+                    </a>
+                @endif
 
-                <a class="navbar-brand" href="{{ url('partners') }}">
-                    partners
-                </a>
-                <a class="navbar-brand" href="{{ url('roles') }}">
-                    roles
-                </a>
-                <a class="navbar-brand" href="{{ url('skills') }}">
-                    Skils
-                </a>
-                @endcan
-              
+                @if (Auth::user()->HasRole('admin'))
+                    <a class="navbar-brand" href="{{ url('adverts') }}">
+                        Adverts
+                    </a>
+
+                    <a class="navbar-brand" href="{{ url('partners') }}">
+                        Partners
+                    </a>
+
+                    <a class="navbar-brand" href="{{ url('roles') }}">
+                        Roles
+                    </a>
+
+                    <a class="navbar-brand" href="{{ url('skills') }}">
+                        Skills
+                    </a>
+                @endif
+            
+                @endif
                 {{-- <a href="{{ url('/skills') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Skills</a> --}}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -51,37 +60,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav ms-auto">
-                                <a class="navbar-brand" href="{{ route('home') }}">
-                                    Home
-                                </a>
-                                @if (Route::has('login'))
-                                    @auth
-                                   
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ url('/profile') }}">Profile</a>
-                                        </li>
-                                    @else
-                                        {{-- <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('login') }}">Log in</a>
-                                        </li> --}}
-                                        {{-- @if (Route::has('register'))
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('register') }}">Register</a>
-                                            </li>
-                                        @endif --}}
-                                    @endauth
-                                @endif
-                            </ul>
-                        </div>
 
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -123,8 +107,6 @@
             @yield('content')
         </main>
     </div>
-     <!-- Bootstrap JS and Popper.js (required for Bootstrap) -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js" integrity="sha512-Pk2+LA/6o5q5Fc8Lw/A6ajWweO3O/PjjKKCTVhjeT6h5aJzh3qgeXW1Lcbms2G7eZ7NOaWuy+V12eg+FyZ00jQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CA..."></script>
+    
 </body>
 </html>

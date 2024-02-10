@@ -29,6 +29,7 @@ Route::put('/profile',[App\Http\Controllers\PofileController::class, 'update'])-
 
 Route::get('/partners/archive',[App\Http\Controllers\PartnerController::class,'archive'])->name('partners.archive');
 Route::get('/partners/all',[App\Http\Controllers\PartnerController::class,'all'])->name('partners.all');
+Route::put('/adverts/applay', [App\Http\Controllers\AdvertController::class, 'applay'])->name('advert.applay');
 // Route::get('/partners/all', 'App\Http\Controllers\PartnerController@all')->name('partners.all');    
 
 Route::resource('partners', PartnerController::class)->middleware('auth');
