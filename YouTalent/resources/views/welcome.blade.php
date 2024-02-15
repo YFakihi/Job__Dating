@@ -34,19 +34,33 @@
                         <img src='https://img.freepik.com/free-photo/3d-render-megaphone-loudspeaker-with-flashes_107791-17345.jpg?w=740&t=st=1706873491~exp=1706874091~hmac=2e4197d22bbd9bc1c004761418646b67fa559d035519c3bda855d6de02c2a9d9' class="card-img-top" alt="Book Image">
                         <div class="card-body">
                             <h2 class="card-title">{{$advert->title}}</h2>
-                            <p class="card-text">{{$advert->content}}</p>
+                            <p class="card-text text-truncate">{{$advert->content}}</p>
                             <h2 class="card-title">{{$advert->partner->name}}</h2>
-                            <form action="{{route('advert.applay') }}" method="post">
+                            @if (Auth::check())
+                         @if (Auth::user()->HasRole('learner'))
+                         
+                               <form action="{{route('advert.applay') }}" method="post">
                                 <input type="hidden" name="advert_ids[]" value="{{$advert->id}}" >
                                 @method('PUT')
                                   @csrf
                                 <button  type="submit" class="btn btn-warning">Apply now</button>
                             </form>
-                           
+                        @endif
+                        @endif  
                         </div>
                     </div>
                 </div>
             @endforeach
+
+            {{-- <div class="card" style="width: 18rem;">
+             
+                <div class="card-body">
+                  <h5 class="card-title">count adverts has appliyed</h5>
+                     {{ $appliedAdvertsCount }}
+                </div>
+              </div> --}}
+        <h1></h1>
+
         </div>
     </div>
   

@@ -4,6 +4,7 @@
 
 @extends('layouts.app')
 
+
 @section('content')
     
 
@@ -17,73 +18,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <link rel="stylesheet" href="path/to/select2.css">
     <script src="path/to/select2.js"></script>
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <title>Document</title>
 </head>
 
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">
-            Home
-        </a>
-        <a class="navbar-brand" href="{{ url('adverts') }}">
-            adverts
-        </a>
 
-        <a class="navbar-brand" href="{{ url('partners') }}">
-            partners
-        </a>
-        <a class="navbar-brand" href="{{ url('roles') }}">
-            roles
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto">
-
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                    @endif
-
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                                <button type="submit"></button>
-                            </form>
-                        </div>
-                    </li>
-                @endguest
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <body>
     <div class="container">
@@ -104,9 +45,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card mt-3">
-                      
-                    </div>
+                
                 </div>
                 <div class="col-md-8">
                     <div class="card mb-3">
@@ -143,7 +82,7 @@
                     
 
                     <div>
-                        <table class="table table-dark">
+                        <table class="table table-light">
                             <thead>
                                 <tr>
                                     <th scope="col">User</th>
@@ -170,6 +109,21 @@
                         </table>
                         
                     </div>
+
+
+                    <!-- Add a new section for displaying applied advertisements -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h3>Your Adverts</h3>
+                        <ul>
+                            @foreach (Auth::user()->adverts as $appliedAdvert)
+                                <li>{{ $appliedAdvert->title }}</li>
+                                <p>{{ $appliedAdvert->content }}</p>
+                                <p>Partner: {{ $appliedAdvert->partner->name }}</p>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
                 </div>
 
 

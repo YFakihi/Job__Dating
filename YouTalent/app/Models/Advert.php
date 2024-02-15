@@ -23,7 +23,7 @@ class Advert extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class, 'user_advert','user_id','advert_id');
+        return $this->belongsToMany(User::class, 'user_advert','user_id','advert_id');
     }
 
 

@@ -36,7 +36,6 @@ Route::resource('partners', PartnerController::class)->middleware('auth');
 Route::resource('adverts',AdvertController::class)->middleware('auth');
 Route::resource('roles',RoleController::class)->middleware('auth');
 Route::resource('skills',SkillsController::class)->middleware('auth');
-// Route::resource('Profile',PofileController::class)->middleware('auth');
 
 
 

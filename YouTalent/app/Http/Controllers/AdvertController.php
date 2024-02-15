@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Partner;
 use App\Models\advert;
 use App\Models\Skills;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class advertController extends Controller
@@ -54,14 +55,22 @@ class advertController extends Controller
        
         if (auth()->check()) {
             $user = auth()->user();
-            $user->adverts()->attach($request->advert_ids);
-            
-            return redirect()->route('adverts.index');
+            $existingAdvertIds = $user->adverts->pluck('id')->toArray();
+        
+            $newAdvertIds = array_diff($request->advert_ids, $existingAdvertIds);
+        
+            if (!empty($newAdvertIds)) {
+                
+                $user->adverts()->attach($newAdvertIds);
+                return redirect()->route('home');
+            }else{
+                return redirect()->route('home')->with('alerdy applay');
+
+            }  
         } else {
-            // Handle the case where the user is not authenticated
-            // Redirect them to the login page or show an error message
-            return redirect()->route('login'); // Example redirect to the login page
+            return redirect()->route('login');
         }
+        
     }
     /**
      * Display the specified resource.
@@ -103,17 +112,12 @@ class advertController extends Controller
 
     return redirect()->back()->with('success', 'advert updated successfully.');
 }
-
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(advert $advert)
     {
-        $advert->delete();
-         
+        $advert->delete();  
         return redirect()->back()->with('success','advert deleted successfully');
     }
-
-   
 }
